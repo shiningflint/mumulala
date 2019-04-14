@@ -1,0 +1,11 @@
+# Recipe app
+
+# ignore nvmrc files
+web/recipe/.nvmrc
+
+# ignore node_modules
+web/recipe/node_modules
+
+# ignore dist folder
+web/recipe/dist
+# ----------------------------------------------------------------

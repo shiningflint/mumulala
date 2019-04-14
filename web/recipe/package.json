@@ -1,0 +1,23 @@
+{
+  "name": "recipe",
+  "version": "1.0.0",
+  "description": "recipe and shopping list",
+  "main": "index.js",
+  "author": "Adam Christopher",
+  "license": "GPL-3.0+",
+  "scripts": {
+    "server": "webpack-dev-server",
+    "build": "set NODE_ENV='production'&&webpack -p",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
