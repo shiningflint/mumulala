@@ -14,6 +14,7 @@ module.exports = {
     'indent': 0,
     'no-var': "error",
     'prefer-const': "error",
-    'semi': [1, 'never']
+    'semi': [1, 'never'],
+    'comma-dangle': [1, 'always']
   },
 }
