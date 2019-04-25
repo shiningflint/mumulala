@@ -9,4 +9,10 @@ module.exports = {
     path: path.resolve(paths.root, 'dist'),
     filename: '[name].[contenthash].js'
   },
+  resolve: {
+    alias: Object.assign({}, paths, {
+      'vue$': 'vue/dist/vue.esm.js',
+    }),
+    extensions: ['.js', '.css', '.scss', '.vue']
+  },
 }

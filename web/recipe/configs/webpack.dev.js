@@ -11,6 +11,7 @@ const config = env => {
       module: {
         rules: [
           rules.babelEslint,
+          rules.eslint,
           rules.vue
         ]
       },
