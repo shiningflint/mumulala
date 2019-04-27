@@ -1,7 +1,8 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common.js')
 const rules = require('./webpack.rules.js')
@@ -13,6 +14,7 @@ const config = env => {
       module: {
         rules: [
           rules.babelEslint,
+          rules.extractCssLoader,
           rules.vue
         ]
       },
@@ -25,6 +27,10 @@ const config = env => {
         new HtmlWebpackPlugin({
           title: 'MumuLala Recipe',
           template: 'src/index.html'
+        }),
+        new MiniCssExtractPlugin({
+          chunkFilename: "style.[contenthash].css",
+          filename: 'style.[hash].css'
         }),
         new VueLoaderPlugin()
       ],

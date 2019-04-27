@@ -12,6 +12,7 @@ const config = env => {
         rules: [
           rules.babelEslint,
           rules.eslint,
+          rules.sassLoader,
           rules.vue
         ]
       },
