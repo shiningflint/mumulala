@@ -39,7 +39,10 @@ const config = env => {
           new UglifyJSPlugin({
             uglifyOptions: { compress: { drop_console: true } }
           })
-        ]
+        ],
+        runtimeChunk: {
+          name: "manifest"
+        }
       },
       mode: 'production'
     }
