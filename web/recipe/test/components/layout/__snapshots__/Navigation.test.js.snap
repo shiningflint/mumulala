@@ -10,18 +10,22 @@ exports[`Navigation Mounts without error 1`] = `
     class="links"
   >
     <li>
-      <router-link
+      <router-link-stub
+        event="click"
+        tag="a"
         to="[object Object]"
       >
         Home
-      </router-link>
+      </router-link-stub>
     </li>
     <li>
-      <router-link
+      <router-link-stub
+        event="click"
+        tag="a"
         to="[object Object]"
       >
         About
-      </router-link>
+      </router-link-stub>
     </li>
   </ul>
 </div>
