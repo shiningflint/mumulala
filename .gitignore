@@ -8,4 +8,7 @@ web/recipe/node_modules
 
 # ignore dist folder
 web/recipe/dist
+
+# ignore jest coverage
+web/recipe/coverage
 # ----------------------------------------------------------------

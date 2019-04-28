@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Mounts without error 1`] = `
+<div>
+  <h3>
+    Navigation
+  </h3>
+   
+  <ul
+    class="links"
+  >
+    <li>
+      <router-link
+        to="[object Object]"
+      >
+        Home
+      </router-link>
+    </li>
+    <li>
+      <router-link
+        to="[object Object]"
+      >
+        About
+      </router-link>
+    </li>
+  </ul>
+</div>
+`;
