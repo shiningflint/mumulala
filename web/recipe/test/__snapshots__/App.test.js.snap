@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Mounts without error 1`] = `
+<div>
+  <navigation-stub />
+   
+  <router-view-stub
+    name="default"
+  />
+</div>
+`;

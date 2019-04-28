@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About Mounts without error 1`] = `
+<div
+  class="about"
+>
+  
+  This is the about page
+
+</div>
+`;

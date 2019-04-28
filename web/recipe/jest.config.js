@@ -16,9 +16,9 @@ module.exports = {
     "^.+\\.vue$": "vue-jest",
     ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$": "jest-transform-stub"
   },
-  globals: {
-    "TARGET_ENV": "production"
-  },
+  // globals: {
+  //   "TARGET_ENV": "production"
+  // },
   // setupFiles: [
   //   "./test/MockData/localStorageMock.js"
   // ],
@@ -30,6 +30,7 @@ module.exports = {
     "^src(.*)": "<rootDir>/src$1",
     "^stylesheets(.*)": "<rootDir>/src/stylesheets$1",
     "^test(.*)": "<rootDir>/test$1",
+    "^views(.*)": "<rootDir>/src/views$1",
     "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
   },
   transformIgnorePatterns: [

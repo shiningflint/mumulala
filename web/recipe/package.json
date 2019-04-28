@@ -8,7 +8,7 @@
   "scripts": {
     "server": "bnr dev:hot",
     "build": "rm -rf ./dist/* && bnr build:prod",
-    "test": "jest --coverage --watch"
+    "test": "jest --coverage"
   },
   "betterScripts": {
     "dev:hot": {
@@ -25,7 +25,7 @@
     "@babel/preset-env": "^7.4.3",
     "@vue/test-utils": "^1.0.0-beta.29",
     "autoprefixer": "^9.5.1",
-    "babel-core": "^7.0.0-0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
@@ -51,7 +51,6 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
-    "vue-jest": "^3.0.4",
     "vue-loader": "^15.7.0",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
@@ -62,6 +61,7 @@
   },
   "dependencies": {
     "vue": "^2.6.10",
+    "vue-jest": "^3.0.4",
     "vue-router": "^3.0.6"
   }
 }
