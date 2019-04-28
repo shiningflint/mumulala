@@ -1,9 +1,11 @@
 @import 'stylesheets/vars.scss';
+@import 'stylesheets/reset.scss';
 
 html,
 body {
   height: 100%;
   width: 100%;
-  font-family: 'Muli', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  background: $gray;
+  font-family: $base-fonts;
+  font-size: $base-pixel;
+  background: #404750;
 }

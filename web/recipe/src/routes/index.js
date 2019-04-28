@@ -9,6 +9,7 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
+      component: asyncComponentLoader('Recipes'),
     },
     {
       path: '/about',
