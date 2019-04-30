@@ -1,0 +1,20 @@
+FROM node:8.16-alpine as builder
+
+RUN apk add --update yarn
+
+WORKDIR /home/web
+
+COPY web/recipe/package.json web/recipe/yarn.lock /home/web/
+RUN yarn install
+COPY web/recipe/.babelrc web/recipe/.eslintrc.js web/recipe/jest.config.js /home/web/
+COPY web/recipe/configs /home/web/configs/
+COPY web/recipe/test /home/web/test/
+COPY web/recipe/src /home/web/src/
+RUN yarn build
+
+FROM nginx:alpine
+WORKDIR /var/www/webapp
+COPY --from=builder /home/web/dist/ /var/www/webapp/
+COPY docker/recipe/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
