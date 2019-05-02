@@ -12,6 +12,11 @@ const router = new VueRouter({
       component: asyncComponentLoader('Recipes'),
     },
     {
+      path: '/recipes/:recipeID',
+      name: 'recipeShow',
+      component: asyncComponentLoader('Recipes', 'Show'),
+    },
+    {
       path: '/about',
       name: 'about',
       component: asyncComponentLoader('About'),

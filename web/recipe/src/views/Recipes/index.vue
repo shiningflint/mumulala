@@ -1,24 +1,32 @@
 <template>
-  <div class="recipe-page">
-    <h1 class="title">レシピー</h1>
-    <ul class="recipe-ul" v-if="recipes.length > 0">
-      <list-image-small
-        v-for="recipe in recipes"
-        :key="recipe.id"
-        :title="recipe.title"
-        :description="recipe.description"
-        :image="recipe.image"
-      />
-    </ul>
-    <p v-else class="recipe-ul">No Recipes Found</p>
+  <div class="full-height">
+    <layout-header title="レシピー"/>
+    <page-content>
+      <ul v-if="recipes.length > 0">
+        <list-image-small
+          v-for="recipe in recipes"
+          :key="recipe.id"
+          :title="recipe.title"
+          :description="recipe.description"
+          :image="recipe.image"
+          @goToShow="goToShow(recipe.id)"
+        />
+      </ul>
+      <p v-else class="recipe-ul">No Recipes Found</p>
+    </page-content>
   </div>
 </template>
 
 <script>
 import ListImageSmall from 'components/ListImageSmall'
+import LayoutHeader from 'components/layout/Header'
+import PageContent from 'components/layout/PageContent'
+
 export default {
   components: {
     ListImageSmall,
+    LayoutHeader,
+    PageContent,
   },
   data () {
     return {
@@ -29,23 +37,11 @@ export default {
       ],
     }
   },
+  methods: {
+    goToShow (recipeID) {
+      console.log('going to the detail page', recipeID)
+      this.$router.push({ name: 'recipeShow', params: { recipeID, }, })
+    },
+  },
 }
 </script>
-
-<style lang="scss" scoped>
-@import 'stylesheets/vars.scss';
-
-.recipe-page {
-  height: 100%;
-}
-.title {
-  background: $dark-brown;
-  color: $light-brown;
-  font-size: $base-pixel * 1.953;
-  padding: $base-pixel;
-}
-.recipe-ul {
-  padding: $base-pixel;
-  padding-bottom: $base-pixel * 3;
-}
-</style>

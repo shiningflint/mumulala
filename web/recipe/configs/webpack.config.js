@@ -15,6 +15,7 @@ const config = env => {
         rules: [
           rules.babelEslint,
           rules.extractCssLoader,
+          rules.file,
           rules.vue
         ]
       },
