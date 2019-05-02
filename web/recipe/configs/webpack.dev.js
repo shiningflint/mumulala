@@ -3,6 +3,8 @@ const merge = require('webpack-merge')
 const rules = require('./webpack.rules.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const paths = require('./webpack.paths.js');
+const path = require('path');
 
 const config = env => {
   return merge (
@@ -19,7 +21,8 @@ const config = env => {
       plugins: [
         new HtmlWebpackPlugin({
           title: 'MumuLala Recipe',
-          template: 'src/index.html'
+          template: path.resolve(paths.src, 'index.html'),
+          inject: true,
         }),
         new VueLoaderPlugin()
       ],

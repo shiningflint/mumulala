@@ -6,6 +6,7 @@ const stylesheets = path.resolve(src, 'stylesheets')
 const views = path.resolve(src, 'views')
 
 module.exports = {
+  'vue$': 'vue/dist/vue.esm.js',
   'public': '/',
   src,
   components,

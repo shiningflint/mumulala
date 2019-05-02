@@ -7,7 +7,9 @@ module.exports = {
   },
   output: {
     path: path.resolve(paths.root, 'dist'),
-    filename: '[name].[contenthash].js'
+    publicPath: paths.public,
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
   },
   resolve: {
     alias: Object.assign({}, paths, {
