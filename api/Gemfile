@@ -1,0 +1,14 @@
+source "https://rubygems.org"
+
+# Using roda & sequel framework
+gem "roda"
+gem "sequel"
+
+# rack unreloader to auto reload when a file changes
+gem "rack-unreloader"
+
+# dotenv to load environment variables in .env file
+gem "dotenv"
+
+# for running rake tasks
+gem "rake"

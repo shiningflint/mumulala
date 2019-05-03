@@ -1,7 +1,14 @@
+# API app
+api/.env
+
+# ----------------------------------------------------------------
+
 # Recipe app
 
 # ignore nvmrc files
 web/recipe/.nvmrc
+
+web/recipe/yarn-error.log
 
 # ignore node_modules
 web/recipe/node_modules
@@ -11,4 +18,5 @@ web/recipe/dist
 
 # ignore jest coverage
 web/recipe/coverage
+
 # ----------------------------------------------------------------
