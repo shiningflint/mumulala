@@ -70,3 +70,11 @@ namespace :seed do
     end
   end
 end
+
+namespace :shell do
+  desc "Starts an irb shell"
+  task :irb do
+    trap('INT', "IGNORE")
+    sh "irb -r ./models"
+  end
+end
