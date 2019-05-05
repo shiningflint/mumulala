@@ -12,3 +12,7 @@ gem "dotenv"
 
 # for running rake tasks
 gem "rake"
+
+group :test do
+  gem "rspec"
+end
