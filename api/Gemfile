@@ -14,5 +14,6 @@ gem "dotenv"
 gem "rake"
 
 group :test do
-  gem "rspec"
+  gem "minitest"
+  gem "rack-test"
 end

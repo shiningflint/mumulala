@@ -13,6 +13,14 @@ namespace :db do
     password: APP_ENV['DB_PASSWORD']
   )
 
+  DB_TEST = Sequel.connect(
+    adapter: 'postgres',
+    host: APP_ENV['DB_HOST_TEST'],
+    database: APP_ENV['DB_TEST'],
+    user: APP_ENV['DB_USER_TEST'],
+    password: APP_ENV['DB_PASSWORD_TEST']
+  )
+
   desc 'Prints current schema version'
   task :version do
     version = get_file_version()
@@ -22,6 +30,11 @@ namespace :db do
   desc 'Perform migration up to latest migration available'
   task :migrate do
     Sequel::Migrator.run(DB, 'migrations')
+    Rake::Task['db:version'].execute
+  end
+
+  task :migrate_test do
+    Sequel::Migrator.run(DB_TEST, 'migrations')
     Rake::Task['db:version'].execute
   end
 
