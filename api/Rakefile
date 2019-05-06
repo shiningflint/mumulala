@@ -61,6 +61,10 @@ namespace :db do
   end
 end
 
+task :test do
+  sh "ruby ./test/web/test_recipes.rb"
+end
+
 namespace :seed do
   desc "Seed recipes"
   task :recipes do

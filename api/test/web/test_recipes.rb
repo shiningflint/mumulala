@@ -1,7 +1,5 @@
-require_relative '../test_helper'
+require_relative 'test_helper'
 require_relative '../../app'
-require 'minitest/autorun'
-require 'rack/test'
 
 class RecipesTest < Minitest::Test
   include Rack::Test::Methods
@@ -12,6 +10,6 @@ class RecipesTest < Minitest::Test
 
   def test_recipes
     get '/recipes'
-    assert last_response.ok?
+    assert last_response.not_found?
   end
 end

@@ -10,6 +10,7 @@ class App < Roda
     r.on "recipes" do
       r.is do
         r.get do
+          r.halt if Recipe.all.empty?
           Recipe.all.map{ |re| re.to_hash }.to_json
         end
 
