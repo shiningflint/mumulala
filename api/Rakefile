@@ -2,24 +2,19 @@ namespace :db do
   require 'sequel'
   require 'dotenv'
 
+  ENV['RACK_ENV'] = ENV['RACK_ENV'] || 'development'
   APP_ENV = Dotenv.load
   Sequel.extension :migration
 
-  DB = Sequel.connect(
-    adapter: 'postgres',
-    host: APP_ENV['DB_HOST'],
-    database: APP_ENV['DB'],
-    user: APP_ENV['DB_USER'],
-    password: APP_ENV['DB_PASSWORD']
-  )
-
-  DB_TEST = Sequel.connect(
-    adapter: 'postgres',
-    host: APP_ENV['DB_HOST_TEST'],
-    database: APP_ENV['DB_TEST'],
-    user: APP_ENV['DB_USER_TEST'],
-    password: APP_ENV['DB_PASSWORD_TEST']
-  )
+  DB = lambda do
+    Sequel.connect(
+      adapter: 'postgres',
+      host: APP_ENV["DB_HOST_#{ENV['RACK_ENV'].upcase}"],
+      database: APP_ENV["DB_#{ENV['RACK_ENV'].upcase}"],
+      user: APP_ENV["DB_USER_#{ENV['RACK_ENV'].upcase}"],
+      password: APP_ENV["DB_PASSWORD_#{ENV['RACK_ENV'].upcase}"]
+    )
+  end
 
   desc 'Prints current schema version'
   task :version do
@@ -29,12 +24,7 @@ namespace :db do
 
   desc 'Perform migration up to latest migration available'
   task :migrate do
-    Sequel::Migrator.run(DB, 'migrations')
-    Rake::Task['db:version'].execute
-  end
-
-  task :migrate_test do
-    Sequel::Migrator.run(DB_TEST, 'migrations')
+    Sequel::Migrator.run(DB.call, 'migrations')
     Rake::Task['db:version'].execute
   end
 
@@ -47,22 +37,23 @@ namespace :db do
                 get_file_version(-2)
               end
 
-    Sequel::Migrator.run(DB, 'migrations', target: version)
+    Sequel::Migrator.run(DB.call, 'migrations', target: version)
     Rake::Task['db:version'].execute
   end
 
   desc "Perform migration reset (full rollback and migration)"
   task :reset do
-    Sequel::Migrator.run(DB, "migrations", target: 0)
-    Sequel::Migrator.run(DB, "migrations")
+    Sequel::Migrator.run(DB.call, "migrations", target: 0)
+    Sequel::Migrator.run(DB.call, "migrations")
     Rake::Task['db:version'].execute
   end
 
   def get_file_version(reverse_index = -1)
-    if DB.tables.include?(:schema_migrations) &&
-       DB[:schema_migrations].all.length > 0 &&
-       DB[:schema_migrations].all[reverse_index]
-        filename = DB[:schema_migrations].all[reverse_index][:filename]
+    version_db = DB.call
+    if version_db.tables.include?(:schema_migrations) &&
+       version_db[:schema_migrations].all.length > 0 &&
+       version_db[:schema_migrations].all[reverse_index]
+        filename = version_db[:schema_migrations].all[reverse_index][:filename]
         /^\d+(?=_)/.match(filename).to_s.to_i
     else
       0
@@ -79,7 +70,7 @@ namespace :seed do
       { name: 'ゴーヤチャンプル', description: 'Go ya boyz' },
     ]
     recipes.each do |recipe|
-      DB[:recipes].insert(recipe)
+      DB.call[:recipes].insert(recipe)
     end
   end
 end
