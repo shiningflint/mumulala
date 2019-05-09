@@ -60,6 +60,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "vue": "^2.6.10",
     "vue-jest": "^3.0.4",
     "vue-router": "^3.0.6",

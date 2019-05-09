@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import Api from 'api/fetch'
 import ListImageSmall from 'components/ListImageSmall'
 import LayoutHeader from 'components/layout/Header'
 import PageContent from 'components/layout/PageContent'
@@ -42,6 +43,9 @@ export default {
       console.log('going to the detail page', recipeID)
       this.$router.push({ name: 'recipeShow', params: { recipeID, }, })
     },
+  },
+  created () {
+    console.log('fetching', Api.getData(`http://localhost:9292/recipes`))
   },
 }
 </script>
