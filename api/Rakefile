@@ -19,7 +19,7 @@ namespace :db do
   desc 'Prints current schema version'
   task :version do
     version = get_file_version()
-    puts "Schema version: #{version}"
+    puts "Schema version #{ENV['RACK_ENV']}: #{version}"
   end
 
   desc 'Perform migration up to latest migration available'
@@ -79,10 +79,9 @@ namespace :seed do
   end
 end
 
-namespace :shell do
-  desc "Starts an irb shell"
-  task :irb do
-    trap('INT', "IGNORE")
-    sh "irb -r ./models"
-  end
+
+desc "Starts an irb shell"
+task :console do
+  trap('INT', "IGNORE")
+  sh "irb -r ./models"
 end

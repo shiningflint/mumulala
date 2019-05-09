@@ -25,16 +25,19 @@ class App < Roda
       end
 
       r.on(:recipe_id, { method: :get }) do |recipe_id|
+        r.halt unless Recipe[recipe_id].is_a? Recipe
         Recipe[recipe_id].to_hash.to_json
       end
 
       r.on(:recipe_id, { method: ['patch', 'put'] }) do |recipe_id|
+        r.halt unless Recipe[recipe_id].is_a? Recipe
         params = r.params.merge({ updated_at: Time.now.getutc })
         Recipe[recipe_id].update(params)
         { status: 'ok', recipe: Recipe[recipe_id].to_hash }.to_json
       end
 
       r.on(:recipe_id, { method: :delete }) do |recipe_id|
+        r.halt unless Recipe[recipe_id].is_a? Recipe
         Recipe[recipe_id].delete
         { status: 'ok', message: "deleted recipe #{recipe_id}" }.to_json
       end
