@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch'
 
 const fetchData = ({ url = '', method = 'GET', data = null, }) => {
   return fetch(url)
-      .then((response) => response)
+      .then((response) => response.json())
       .catch((err) => {
         if (!err.json) {
           err.error = 'Server did not reply error response'

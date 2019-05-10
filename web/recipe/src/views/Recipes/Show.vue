@@ -1,6 +1,6 @@
 <template>
   <div class="full-height">
-    <layout-header :title="title" :backButton="{ name: 'home' }" />
+    <layout-header :title="name" :backButton="{ name: 'home' }" />
     <page-content>
       <p>{{ description }}</p>
     </page-content>
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import RecipesApi from 'api/recipes'
 import LayoutHeader from 'components/layout/Header'
 import PageContent from 'components/layout/PageContent'
 
@@ -18,10 +19,18 @@ export default {
   },
   data () {
     return {
-      id: '2',
-      title: 'スパゲッティハンバーグ',
-      description: 'Delicious spaghetti hamburger with demi glase sauce and parmesan cheese',
+      id: null,
+      name: '',
+      description: '',
     }
+  },
+  created () {
+    RecipesApi.getOne(this.$route.params.recipeID)
+    .then(response => {
+      this.id = response.id
+      this.name = response.name
+      this.description = response.description
+    })
   },
 }
 </script>

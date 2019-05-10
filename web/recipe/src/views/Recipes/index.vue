@@ -6,7 +6,7 @@
         <list-image-small
           v-for="recipe in recipes"
           :key="recipe.id"
-          :title="recipe.title"
+          :title="recipe.name"
           :description="recipe.description"
           :image="recipe.image"
           @goToShow="goToShow(recipe.id)"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Api from 'api/fetch'
+import RecipesApi from 'api/recipes'
 import ListImageSmall from 'components/ListImageSmall'
 import LayoutHeader from 'components/layout/Header'
 import PageContent from 'components/layout/PageContent'
@@ -31,21 +31,19 @@ export default {
   },
   data () {
     return {
-      recipes: [
-        { id: '2', title: 'スパゲッティハンバーグ', description: 'Delicious spaghetti hamburger with demi glase sauce and parmesan cheese', },
-        { id: '3', title: 'チャハン', description: '美味しいインドネシア風のチャハン。辛いですよ！', },
-        { id: '4', title: '餃子', description: '牛肉ときのこ入りのまぼろしい餃子', },
-      ],
+      recipes: [],
     }
   },
   methods: {
     goToShow (recipeID) {
-      console.log('going to the detail page', recipeID)
       this.$router.push({ name: 'recipeShow', params: { recipeID, }, })
     },
   },
   created () {
-    console.log('fetching', Api.getData(`http://localhost:9292/recipes`))
+    RecipesApi.getAll()
+    .then(response => {
+      this.recipes = response
+    })
   },
 }
 </script>
