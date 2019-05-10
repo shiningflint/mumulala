@@ -12,8 +12,16 @@
           @goToShow="goToShow(recipe.id)"
         />
       </ul>
-      <p v-else class="recipe-ul">No Recipes Found</p>
+      <p v-else class="recipe-ul">レシピー無し</p>
+      <div>
+        <button type="button" class="add-recipe" @click="isCreateNew = true">
+          レチピー新規追加
+        </button>
+      </div>
     </page-content>
+    <div v-if="isCreateNew" @click="isCreateNew = false">
+      Creating new recipe here
+    </div>
   </div>
 </template>
 
@@ -31,6 +39,7 @@ export default {
   },
   data () {
     return {
+      isCreateNew: false,
       recipes: [],
     }
   },
@@ -47,3 +56,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+@import 'stylesheets/mixin.scss';
+
+.add-recipe {
+  @include button;
+}
+</style>
