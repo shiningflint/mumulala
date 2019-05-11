@@ -10,6 +10,37 @@ body {
   background: #404750;
 }
 
+button {
+  background: $dark-brown;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 2px 4px $dark-brown-shadow;
+  color: $light-brown;
+  cursor: pointer;
+  font-size: $base-pixel;
+  font-weight: bold;
+  padding: $base-pixel;
+  width: 100%;
+  &:active {
+    box-shadow: none;
+    transform: translate(2px, 4px);
+  }
+}
+
+input[type=text] {
+  font-size: $base-pixel * .8;
+  line-height: 1;
+  padding: $base-pixel / 2 / 2;
+  width: 100%;
+}
+
+textarea {
+  font-size: $base-pixel * .8;
+  line-height: 1;
+  padding: $base-pixel / 2 / 2;
+  width: 100%;
+}
+
 .full-height {
   height: 100%;
 }
