@@ -21,7 +21,7 @@
     </page-content>
     <recipe-form
       v-if="showCreate"
-      :isLoading="isCreating"
+      :isLoading="isLoading"
       @close="showCreate = false"
       @submit="addNewRecipe"
     />
@@ -44,18 +44,18 @@ export default {
   },
   data () {
     return {
-      isCreating: false,
+      isLoading: false,
       showCreate: false,
       recipes: [],
     }
   },
   methods: {
     addNewRecipe ({ name, description, }) {
-      if (this.isCreating) return
-      this.isCreating = true
+      if (this.isLoading) return
+      this.isLoading = true
       RecipesApi.create({ name, description, })
       .then(response => {
-        this.isCreating = false
+        this.isLoading = false
         this.showCreate = false
         this.recipes.push(response)
       })
