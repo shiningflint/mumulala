@@ -10,7 +10,7 @@
         <p><input v-model="name" type="text" name="name" class="input"></p>
       </label>
       <label class="form-item">
-        <p>レシピーの説明</p>
+        <p>レシピーの作り方</p>
         <p>
           <textarea v-model="description" name="description" rows="8" class="textarea"></textarea>
         </p>

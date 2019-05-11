@@ -7,7 +7,6 @@
           v-for="recipe in recipes"
           :key="recipe.id"
           :title="recipe.name"
-          :description="recipe.description"
           :image="recipe.image"
           @goToShow="goToShow(recipe.id)"
         />
