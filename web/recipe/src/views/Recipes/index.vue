@@ -19,9 +19,7 @@
         </button>
       </div>
     </page-content>
-    <div v-if="isCreateNew" @click="isCreateNew = false">
-      Creating new recipe here
-    </div>
+    <recipe-form v-if="isCreateNew" @close="isCreateNew = false" />
   </div>
 </template>
 
@@ -30,12 +28,14 @@ import RecipesApi from 'api/recipes'
 import ListImageSmall from 'components/ListImageSmall'
 import LayoutHeader from 'components/layout/Header'
 import PageContent from 'components/layout/PageContent'
+import RecipeForm from 'components/RecipeForm'
 
 export default {
   components: {
     ListImageSmall,
     LayoutHeader,
     PageContent,
+    RecipeForm,
   },
   data () {
     return {
