@@ -25,7 +25,7 @@ export default {
     }
   },
   created () {
-    RecipesApi.getOne(this.$route.params.recipeID)
+    RecipesApi.show(this.$route.params.recipeID)
     .then(response => {
       this.id = response.id
       this.name = response.name

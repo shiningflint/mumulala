@@ -7,19 +7,23 @@
           v-for="recipe in recipes"
           :key="recipe.id"
           :title="recipe.name"
-          :description="recipe.description"
           :image="recipe.image"
           @goToShow="goToShow(recipe.id)"
         />
       </ul>
       <p v-else class="recipe-ul">レシピー無し</p>
       <div>
-        <button type="button" class="add-recipe" @click="isCreateNew = true">
+        <button type="button" class="add-recipe" @click="showCreate = true">
           レチピー新規追加
         </button>
       </div>
     </page-content>
-    <recipe-form v-if="isCreateNew" @close="isCreateNew = false" />
+    <recipe-form
+      v-if="showCreate"
+      :isLoading="isLoading"
+      @close="showCreate = false"
+      @submit="addNewRecipe"
+    />
   </div>
 </template>
 
@@ -39,28 +43,31 @@ export default {
   },
   data () {
     return {
-      isCreateNew: false,
+      isLoading: false,
+      showCreate: false,
       recipes: [],
     }
   },
   methods: {
+    addNewRecipe ({ name, description, }) {
+      if (this.isLoading) return
+      this.isLoading = true
+      RecipesApi.create({ name, description, })
+      .then(response => {
+        this.isLoading = false
+        this.showCreate = false
+        this.recipes.push(response)
+      })
+    },
     goToShow (recipeID) {
       this.$router.push({ name: 'recipeShow', params: { recipeID, }, })
     },
   },
   created () {
-    RecipesApi.getAll()
+    RecipesApi.index()
     .then(response => {
       this.recipes = response
     })
   },
 }
 </script>
-
-<style lang="scss" scoped>
-@import 'stylesheets/mixin.scss';
-
-.add-recipe {
-  @include button;
-}
-</style>
