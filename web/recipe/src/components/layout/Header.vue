@@ -27,7 +27,6 @@ export default {
 
 .header-wrapper {
   align-items: center;
-  background: $dark-brown;
   display: flex;
   padding: $base-pixel 0 $base-pixel $base-pixel;
 }
@@ -36,7 +35,7 @@ export default {
   width: 30px;
 }
 .title {
-  color: $light-brown;
+  color: $title-color;
   display: inline-block;
   flex: 1;
   font-size: $base-pixel * 1.953;

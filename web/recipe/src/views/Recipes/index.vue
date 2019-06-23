@@ -11,12 +11,11 @@
           @goToShow="goToShow(recipe.id)"
         />
       </ul>
-      <p v-else class="recipe-ul">レシピー無し</p>
-      <div>
+      <!-- div>
         <button type="button" class="add-recipe" @click="showCreate = true">
           レチピー新規追加
         </button>
-      </div>
+      </div -->
     </page-content>
     <recipe-form
       v-if="showCreate"

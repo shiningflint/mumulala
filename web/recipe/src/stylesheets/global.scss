@@ -7,7 +7,12 @@ body {
   width: 100%;
   font-family: $base-fonts;
   font-size: $base-pixel;
-  background: #404750;
+  background: $app-background;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
 }
 
 button {
