@@ -5,12 +5,13 @@ class RecipesTest < SequelTestCase
   include Rack::Test::Methods
 
   def setup
-    methods_without_recipe = [
-      'test_recipes_sad',
-      'test_create_recipe_no_params',
-      'test_create_recipe_happy'
+    methods_without_recipe = %w[
+      test_recipes_sad
+      test_create_recipe_no_params
+      test_create_recipe_happy
     ]
-    add_recipe unless methods_without_recipe.include?(self.name)
+
+    add_recipe unless methods_without_recipe.include?(name)
   end
 
   def add_recipe

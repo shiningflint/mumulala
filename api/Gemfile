@@ -1,20 +1,26 @@
-source "https://rubygems.org"
-
-# Using roda & sequel framework
-gem "roda"
-gem "sequel"
-
-# rack unreloader to auto reload when a file changes
-gem "rack-unreloader"
-gem "rack-cors"
+source 'https://rubygems.org'
 
 # dotenv to load environment variables in .env file
-gem "dotenv"
+gem 'dotenv'
+
+# using postgresql pg gem
+gem 'pg'
+
+# rack unreloader to auto reload when a file changes
+gem 'rack-cors'
+gem 'rack-unreloader'
 
 # for running rake tasks
-gem "rake"
+gem 'rake'
+
+# Using roda & sequel framework
+gem 'roda'
+gem 'sequel'
+
+# linter
+gem 'rubocop'
 
 group :test do
-  gem "minitest"
-  gem "rack-test"
+  gem 'minitest'
+  gem 'rack-test'
 end
