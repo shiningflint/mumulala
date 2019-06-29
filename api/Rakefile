@@ -1,22 +1,2 @@
 Dir.glob('./lib/tasks/*.rake').each { |file| load file }
-
-namespace :seed do
-  desc 'Seed recipes'
-  task :recipes do
-    recipes = [
-      { name: 'spaghetti', description: 'Bolognese' },
-      { name: 'さば塩', description: 'さば塩焼き' },
-      { name: 'ゴーヤチャンプル', description: 'Go ya boyz' }
-    ]
-    recipes.each do |recipe|
-      puts recipe
-      DB.call[:recipes].insert(recipe)
-    end
-  end
-end
-
-desc 'Starts an irb shell'
-task :console do
-  trap('INT', 'IGNORE')
-  sh 'irb -r ./models'
-end
+# TODO: DRY the db call, don't forget the seed
