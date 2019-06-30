@@ -1,4 +1,5 @@
-namespace :db do
+# DB helper especially to share the db constant and get file version
+module DbHelper
   require 'sequel'
   require 'dotenv'
 
@@ -16,33 +17,6 @@ namespace :db do
     )
   end
 
-  desc 'Prints current schema version'
-  task :version do
-    version = get_file_version
-    puts "Schema version #{ENV['RACK_ENV']}: #{version}"
-  end
-
-  desc 'Perform migration up to latest migration available'
-  task :migrate do
-    Sequel::Migrator.run(DB.call, 'migrations')
-    Rake::Task['db:version'].execute
-  end
-
-  desc 'Perform rollback to specified target or full rollback as default'
-  task :rollback, :target do |_t, args|
-    version = args[:target] || get_file_version(-2)
-
-    Sequel::Migrator.run(DB.call, 'migrations', target: version)
-    Rake::Task['db:version'].execute
-  end
-
-  desc 'Perform migration reset (full rollback and migration)'
-  task :reset do
-    Sequel::Migrator.run(DB.call, 'migrations', target: 0)
-    Sequel::Migrator.run(DB.call, 'migrations')
-    Rake::Task['db:version'].execute
-  end
-
   def get_file_version(reverse_index = -1) # rubocop:disable Metrics/AbcSize
     version_db = DB.call
     if version_db.tables.include?(:schema_migrations) &&
@@ -52,6 +26,41 @@ namespace :db do
       /^\d+(?=_)/.match(filename).to_s.to_i
     else
       0
+    end
+  end
+end
+
+# rake tasks under db
+module DbRakeTasks
+  extend Rake::DSL
+  extend DbHelper
+
+  namespace :db do
+    desc 'Prints current schema version'
+    task :version do
+      version = get_file_version
+      puts "Schema version #{ENV['RACK_ENV']}: #{version}"
+    end
+
+    desc 'Perform migration up to latest migration available'
+    task :migrate do
+      Sequel::Migrator.run(DbHelper::DB.call, 'migrations')
+      Rake::Task['db:version'].execute
+    end
+
+    desc 'Perform rollback to specified target or full rollback as default'
+    task :rollback, :target do |_t, args|
+      version = args[:target] || get_file_version(-2)
+
+      Sequel::Migrator.run(DbHelper::DB.call, 'migrations', target: version)
+      Rake::Task['db:version'].execute
+    end
+
+    desc 'Perform migration reset (full rollback and migration)'
+    task :reset do
+      Sequel::Migrator.run(DbHelper::DB.call, 'migrations', target: 0)
+      Sequel::Migrator.run(DbHelper::DB.call, 'migrations')
+      Rake::Task['db:version'].execute
     end
   end
 end
