@@ -2,8 +2,8 @@
 module DbHelpers
   Sequel.extension :migration
 
-  def get_file_version(reverse_index = -1) # rubocop:disable Metrics/AbcSize
-    version_db = AppDb::DB
+  def get_file_version(db_object, reverse_index = -1) # rubocop:disable Metrics/AbcSize
+    version_db = db_object
     if version_db.tables.include?(:schema_migrations) &&
        !version_db[:schema_migrations].all.empty? &&
        version_db[:schema_migrations].all[reverse_index]
@@ -23,7 +23,7 @@ module DbRakeTasks
   namespace :db do
     desc 'Prints current schema version'
     task :version do
-      version = get_file_version
+      version = get_file_version(AppDb::DB)
       puts "Schema version #{ENV['RACK_ENV']}: #{version}"
     end
 
@@ -35,7 +35,7 @@ module DbRakeTasks
 
     desc 'Perform rollback to specified target or full rollback as default'
     task :rollback, :target do |_t, args|
-      version = args[:target] || get_file_version(-2)
+      version = args[:target] || get_file_version(AppDb::DB, -2)
 
       Sequel::Migrator.run(AppDb::DB, 'migrations', target: version)
       Rake::Task['db:version'].execute
