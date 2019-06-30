@@ -12,7 +12,7 @@ module SeedTasks
       ]
       recipes.each do |recipe|
         puts recipe
-        DB.call[:recipes].insert(recipe)
+        AppDb::DB[:recipes].insert(recipe)
       end
     end
   end
