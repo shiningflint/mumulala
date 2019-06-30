@@ -1,6 +1,6 @@
 namespace :seed do
   desc 'Seed recipes'
-  task :recipes do
+  task recipes: :load_db do
     recipes = [
       { name: 'spaghetti', description: 'Bolognese' },
       { name: 'さば塩', description: 'さば塩焼き' },

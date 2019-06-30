@@ -1,4 +1,9 @@
-require './db'
-
 Dir.glob('./lib/tasks/*.rake').each { |file| load file }
-# TODO: DRY the db call, don't forget the seed
+
+task :load_db do
+  require './db'
+end
+
+task load_migration: [:load_db] do
+  Sequel.extension :migration
+end
