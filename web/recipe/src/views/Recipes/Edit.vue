@@ -14,7 +14,7 @@ import PageContent from 'components/layout/PageContent'
 export default {
   components: {
     LayoutHeader,
-    PageContent
-  }
+    PageContent,
+  },
 }
 </script>
